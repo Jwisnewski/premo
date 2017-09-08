@@ -1,0 +1,35 @@
+Models
+	class Movies
+		-title
+		-movie id
+		-release date
+		-critic rating
+		-poster image
+		-description
+
+		+filterMovies
+			-by rating
+			-by releasedate
+
+Controllers
+	class MovieFetcher extends Movies
+		+getMovies() -> to array movies[]
+
+Views
+	class DisplayMovies
+
+		+displayMovieList(MovieInstances[])
+			-title
+			-posterimage
+			-critic rating
+			-release date
+			-description
+
+		+displaySingleMovie(MovieInstance)
+			+displayMovieList(implode(movies[]))
+			+displayCredits([movie.credit])
+				-actors
+				-director
+			+displayReviews([movie.review])
+				-reviews
+
