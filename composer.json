@@ -1,0 +1,16 @@
+{
+    "name": "jeffrywisnewski/premo",
+    "type": "project",
+    "require-dev": {
+        "kahlan/kahlan": "^3.1",
+        "behat/behat": "^3.3"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jeff Wisnewski",
+            "email": "jeffrey.joseph@dm-companies.com"
+        }
+    ],
+    "require": {}
+}
