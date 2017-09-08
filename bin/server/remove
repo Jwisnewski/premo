@@ -1,4 +1,4 @@
 #!/bin/bash
 set -x
 
-docker rm -f $(docker ps -a | grep dockerdev | awk '{print $1}')
+docker rm -f $(docker ps -a | grep premo | awk '{print $1}')

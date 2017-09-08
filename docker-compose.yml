@@ -1,7 +1,7 @@
 version: '2'
 services:
   web:
-    container_name: "dockerdev-nginx"
+    container_name: "premo-nginx"
     image: nginx:1.13-alpine
     restart: always
     links:
@@ -13,7 +13,7 @@ services:
     volumes_from:
      - fpm
   fpm:
-    container_name: "dockerdev-fpm"
+    container_name: "premo-fpm"
     image: angelxmoreno/php-fpm-alpine
     restart: always
     volumes:
@@ -25,29 +25,29 @@ services:
      - mongo
      - es
   mysql:
-    container_name: "dockerdev-mysql"
+    container_name: "premo-mysql"
     image: mariadb:10.1
     restart: always
     environment:
-     - MYSQL_ROOT_PASSWORD=dockerdev
-     - MYSQL_USER=dockerdev
-     - MYSQL_PASSWORD=dockerdev
-     - MYSQL_DATABASE=dockerdev
+     - MYSQL_ROOT_PASSWORD=premo
+     - MYSQL_USER=premo
+     - MYSQL_PASSWORD=premo
+     - MYSQL_DATABASE=premo
     volumes:
      - ./data/mysql/:/var/lib/mysql
     ports:
      - "8582:3306"
   redis:
-    container_name: "dockerdev-redis"
+    container_name: "premo-redis"
     image: redis:3.2-alpine
     restart: always
     ports:
      - "8583:6379"
-    command: redis-server --appendonly yes --requirepass dockerdev
+    command: redis-server --appendonly yes --requirepass premo
     volumes:
       - ./data/redis/:/data
   mongo:
-    container_name: "dockerdev-mongo"
+    container_name: "premo-mongo"
     image: mongo:3.0
     restart: always
     volumes:
@@ -55,7 +55,7 @@ services:
     ports:
      - "8584:27017"
   es:
-    container_name: "dockerdev-es"
+    container_name: "premo-es"
     image: elasticsearch:2.4-alpine
     restart: always
     volumes:
