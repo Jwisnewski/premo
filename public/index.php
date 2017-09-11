@@ -14,8 +14,8 @@ $loader = new Loader();
 
 $loader->registerDirs(
     [
-        "../app/controllers/",
-        "../app/models/",
+        "../src/controllers/",
+        "../src/models/",
     ]
 );
 
