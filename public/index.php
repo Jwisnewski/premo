@@ -6,7 +6,7 @@ use Phalcon\Mvc\Application;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Mvc\Url as UrlProvider;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
-
+use Phalcon\Mvc\Router;
 
 
 // Register an autoloader
@@ -20,7 +20,6 @@ $loader->registerDirs(
 );
 
 $loader->register();
-
 
 
 // Create a DI
@@ -38,15 +37,23 @@ $di->set(
     }
 );
 
-// Setup a base URI so that all generated URIs include the "tutorial" folder
+// Use $_SERVER["REQUEST_URI"]
+$di->get('router')->setUriSource(
+    Router::URI_SOURCE_SERVER_REQUEST_URI
+);
+
+// Setup the database service
 $di->set(
-    "url",
+    "db",
     function () {
-        $url = new UrlProvider();
-
-        $url->setBaseUri("/premo/");
-
-        return $url;
+        return new DbAdapter(
+            [
+                "host"     => "mysql",
+                "username" => "premo",
+                "password" => "premo",
+                "dbname"   => "premo"
+            ]
+        );
     }
 );
 
