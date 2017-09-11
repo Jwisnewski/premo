@@ -32,7 +32,7 @@ $di->set(
     function () {
         $view = new View();
 
-        $view->setViewsDir("../app/views/");
+        $view->setViewsDir("../src/views/");
 
         return $view;
     }
