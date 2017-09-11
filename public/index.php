@@ -44,7 +44,7 @@ $di->set(
     function () {
         $url = new UrlProvider();
 
-        $url->setBaseUri("/tutorial/");
+        $url->setBaseUri("/premo/");
 
         return $url;
     }
