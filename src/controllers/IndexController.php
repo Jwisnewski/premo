@@ -1,4 +1,5 @@
 <?php
+Namespace Movies
 	
 use Phalcon\Mvc\Controller;
 

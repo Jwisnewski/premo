@@ -1,8 +1,9 @@
 <?php
+Namespace Premo\Models;
 
 use Phalcon\Mvc\Model
 
-Class Movies Extends Model
+Class Movie Extends Model
 {
 	public $id;
 
