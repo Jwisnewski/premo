@@ -1,9 +1,9 @@
 <?php
 Namespace Premo\Models;
 
-use Phalcon\Mvc\Model
+use Phalcon\Mvc\Model;
 
-Class Movie Extends Model
+Class Movie
 {
 	public $id;
 
