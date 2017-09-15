@@ -1,11 +1,11 @@
 <?php
-Namespace Premo\Models;
+namespace Premo\Models;
 
 use Phalcon\Mvc\Model;
 
-Class Movie
+class Movie
 {
-	public $id;
+    public $id;
 
     public $title;
 
@@ -21,5 +21,4 @@ Class Movie
     {
         $this->setSource("movies");
     }
-
 }

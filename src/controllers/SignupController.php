@@ -1,4 +1,5 @@
 <?php
+namespace Premo\Controller;
 
 use Phalcon\Mvc\Controller;
 
@@ -6,11 +7,10 @@ class SignupController extends Controller
 {
     public function indexAction()
     {
-
     }
     public function registerAction()
     {
-    	$user = new Users();
+        $user = new Users();
 
         // Store and check for errors
         $success = $user->save(

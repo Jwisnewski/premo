@@ -1,4 +1,5 @@
 <?php
+namespace Premo\Models;
 
 use Phalcon\Mvc\Model;
 

@@ -12,5 +12,7 @@
             "email": "jeffrey.joseph@dm-companies.com"
         }
     ],
-    "require": {}
+    "require": {
+        "squizlabs/php_codesniffer": "^3.0"
+    }
 }
