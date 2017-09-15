@@ -8,7 +8,6 @@ use Phalcon\Mvc\Url as UrlProvider;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 use Phalcon\Mvc\Router;
 
-
 // Register an autoloader
 $loader = new Loader();
 
@@ -69,7 +68,3 @@ try {
 } catch (\Exception $e) {
     echo "Exception: ", $e->getMessage();
 }
-
-
-
-?>
