@@ -1,4 +1,5 @@
 <?php
+
 namespace Premo\Services;
 
 use Premo\Models\Movie;
@@ -16,33 +17,42 @@ class FetchMovies
         return $movieData;
     }
 
-    public function jsonStringToArray($resource)
+    /**
+     * @param string $json_string
+     * @return mixed
+     */
+    public function jsonStringToArray($json_string)
     {
-            $movie = new Movie();
-            $resource_arr = json_decode($resource, true);
-            return $resource_arr;
+        $raw_movies_array = json_decode($json_string, true);
+        return $raw_movies_array;
     }
 
-
+    /**
+     * @return bool|string
+     */
     public function getJsonString()
     {
         $completeurl = $this->nowPlaying_url . $this->api_key;
         $contents = file_get_contents($completeurl);
-        
+
         return $contents;
     }
 
-    public function toMovieType($resource)
+    /**
+     * @param array $raw_movie_array
+     * @return Movie
+     */
+    public function toMovieType(array $raw_movie_array)
     {
         $movie = new Movie();
-        print_r($resource);
-        $movie->id = $resource['id'];
-        $movie->title = $resource['title'];
-        $movie->release_date = $resource['release_date'];
-        $movie->poster_image = $resource['poster_path'];
+        print_r($raw_movie_array);
+        $movie->id = $raw_movie_array['id'];
+        $movie->title = $raw_movie_array['title'];
+        $movie->release_date = $raw_movie_array['release_date'];
+        $movie->poster_image = $raw_movie_array['poster_path'];
         echo($movie->poster_image);
-        $movie->critic_rating = $resource['vote_average'];
-        $movie->description = $resource['overview'];
+        $movie->critic_rating = $raw_movie_array['vote_average'];
+        $movie->description = $raw_movie_array['overview'];
         return $movie;
     }
 }
