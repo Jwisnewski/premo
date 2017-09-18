@@ -9,7 +9,11 @@ class FetchMovies
     protected $api_key = "f312ac2cb63002f508d52fd432cea28d";
     protected $nowPlaying_url = "https://api.themoviedb.org/3/movie/latest?api_key=";
 
-    public function getMovies()
+
+    /**
+     * @return Movie
+     */
+    public function getLatestMovie()
     {
         $data_string = $this->getJsonString();
         $data_arr = $this->jsonStringToArray($data_string);
@@ -21,7 +25,7 @@ class FetchMovies
      * @param string $json_string
      * @return mixed
      */
-    public function jsonStringToArray($json_string)
+    protected function jsonStringToArray($json_string)
     {
         $raw_movies_array = json_decode($json_string, true);
         return $raw_movies_array;
@@ -30,7 +34,7 @@ class FetchMovies
     /**
      * @return bool|string
      */
-    public function getJsonString()
+    protected function getJsonString()
     {
         $completeurl = $this->nowPlaying_url . $this->api_key;
         $contents = file_get_contents($completeurl);
@@ -42,7 +46,7 @@ class FetchMovies
      * @param array $raw_movie_array
      * @return Movie
      */
-    public function toMovieType(array $raw_movie_array)
+    protected function toMovieType(array $raw_movie_array)
     {
         $movie = new Movie();
         print_r($raw_movie_array);
