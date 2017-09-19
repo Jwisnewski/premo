@@ -17,7 +17,7 @@ describe(FetchMovies::class, function () {
 
         it('converts the json string into an array', function () {
             expect(FetchMovies::class)
-                ->toReceive('jsonStringToArray')
+                ->toReceive('jsonStringToArray');
             $fetcher = new FetchMovies();
             $fetcher->getLatestMovie();
         });
