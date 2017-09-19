@@ -6,24 +6,9 @@ use Premo\Models\Movie;
 
 class FetchMovies
 {
-    const BASE_URL = "https://api.themoviedb.org/3";
-    protected $api_key = "f312ac2cb63002f508d52fd432cea28d";
-    protected $nowPlaying_url = "https://api.themoviedb.org/3/movie/latest?api_key=";
-    protected $upcoming_movies_url = "https://api.themoviedb.org/3/discover/movie?api_key=";
-    protected $upcoming_movies_url_2 = "&language=en-US&page=1&primary_release_date.gte=";
+    const BASE_URL = 'https://api.themoviedb.org/3';
+    protected $api_key = 'f312ac2cb63002f508d52fd432cea28d';
 
-
-    /**
-     * @return Movie
-     * @deprecated 
-     */
-    public function getLatestMovie()
-    {
-        $data_string = $this->getJsonString();
-        $data_arr = $this->jsonStringToArray($data_string);
-        $movieData = $this->toMovieType([$data_arr]);
-        return $movieData;
-    }
 
     /**
      * @param string $json_string
@@ -48,16 +33,6 @@ class FetchMovies
     }
 
     /**
-     * @return bool|string
-     */
-    protected function getJsonString()
-    {
-        $completeurl = $this->nowPlaying_url . $this->api_key;
-        $contents = file_get_contents($completeurl);
-        return $contents;
-    }
-
-    /**
      * @param array $raw_movies_array
      * @return array
      */
@@ -75,7 +50,6 @@ class FetchMovies
             $movie->description = $raw_movie_array['overview'];
             $movie_array[] = $movie;
         }
-
         return $movie_array;
     }
 
@@ -98,8 +72,6 @@ class FetchMovies
     {
         $date = $this->getTimeZone();
         $params = [
-            'api_key' => $this->api_key,
-            'language' => "en-US",
             'page' => "1",
             'primary_release_date.gte' => $date
         ];
@@ -115,7 +87,14 @@ class FetchMovies
      */
     protected function buildApiUrl($endpoint, array $params = [])
     {
-        $url = self::BASE_URL . $endpoint . '?' . http_build_query($params);
+
+        $default_params = [
+            'api_key' => $this->api_key,
+            'language' => "en-US",
+        ];
+
+        $fetch_params = array_merge($default_params, $params);
+        $url = self::BASE_URL . $endpoint . '?' . http_build_query($fetch_params);
         echo($url);
         return $url;
     }
