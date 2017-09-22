@@ -23,6 +23,7 @@ class FetchMovies
     /**
      * @return string
      */
+
     public function getTimeZone()
     {
         $tz = 'America/New_York';
