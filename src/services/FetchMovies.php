@@ -6,20 +6,9 @@ use Premo\Models\Movie;
 
 class FetchMovies
 {
-    protected $api_key = "f312ac2cb63002f508d52fd432cea28d";
-    protected $nowPlaying_url = "https://api.themoviedb.org/3/movie/latest?api_key=";
+    const BASE_URL = 'https://api.themoviedb.org/3';
+    protected $api_key = 'f312ac2cb63002f508d52fd432cea28d';
 
-
-    /**
-     * @return Movie
-     */
-    public function getLatestMovie()
-    {
-        $data_string = $this->getJsonString();
-        $data_arr = $this->jsonStringToArray($data_string);
-        $movieData = $this->toMovieType($data_arr);
-        return $movieData;
-    }
 
     /**
      * @param string $json_string
@@ -32,31 +21,81 @@ class FetchMovies
     }
 
     /**
+     * @return string
+     */
+    public function getTimeZone()
+    {
+        $tz = 'America/New_York';
+        $timestamp = time();
+        $dt = new \DateTime("now", new \DateTimeZone($tz)); //first argument "must" be a string
+        $dt->setTimestamp($timestamp); //adjust the object to correct timestamp
+        return $dt->format('Y-m-d');
+    }
+
+    /**
+     * @param array $raw_movies_array
+     * @return array
+     */
+    protected function toMovieType(array $raw_movies_array)
+    {
+        //for each loop required
+        $movie_array = [];
+        foreach ($raw_movies_array as $raw_movie_array) {
+            $movie = new Movie();
+            $movie->id = $raw_movie_array['id'];
+            $movie->title = $raw_movie_array['title'];
+            $movie->release_date = $raw_movie_array['release_date'];
+            $movie->poster_image = $raw_movie_array['poster_path'];
+            $movie->critic_rating = $raw_movie_array['vote_average'];
+            $movie->description = $raw_movie_array['overview'];
+            $movie_array[] = $movie;
+        }
+        return $movie_array;
+    }
+
+    /**
+     * @return array
+     */
+    public function getUpcomingMovies()
+    {
+        $data_string = $this->getUpcomingString();
+        $data_arr = $this->jsonStringToArray($data_string);
+        //need to pass through array converting to movie types
+        $movie_data = $this->toMovieType($data_arr['results']);
+        return $movie_data;
+    }
+
+    /**
      * @return bool|string
      */
-    protected function getJsonString()
+    protected function getUpcomingString()
     {
-        $completeurl = $this->nowPlaying_url . $this->api_key;
+        $date = $this->getTimeZone();
+        $params = [
+            'page' => "1",
+            'primary_release_date.gte' => $date
+        ];
+        $completeurl = $this->buildApiUrl('/discover/movie', $params);
         $contents = file_get_contents($completeurl);
-
         return $contents;
     }
 
     /**
-     * @param array $raw_movie_array
-     * @return Movie
+     * @param $endpoint
+     * @param array $params
+     * @return string
      */
-    protected function toMovieType(array $raw_movie_array)
+    protected function buildApiUrl($endpoint, array $params = [])
     {
-        $movie = new Movie();
-        print_r($raw_movie_array);
-        $movie->id = $raw_movie_array['id'];
-        $movie->title = $raw_movie_array['title'];
-        $movie->release_date = $raw_movie_array['release_date'];
-        $movie->poster_image = $raw_movie_array['poster_path'];
-        echo($movie->poster_image);
-        $movie->critic_rating = $raw_movie_array['vote_average'];
-        $movie->description = $raw_movie_array['overview'];
-        return $movie;
+
+        $default_params = [
+            'api_key' => $this->api_key,
+            'language' => "en-US",
+        ];
+
+        $fetch_params = array_merge($default_params, $params);
+        $url = self::BASE_URL . $endpoint . '?' . http_build_query($fetch_params);
+        echo($url);
+        return $url;
     }
 }
