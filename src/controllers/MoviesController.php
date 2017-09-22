@@ -1,5 +1,5 @@
 <?php
-namespace Premo\Controller;
+namespace Premo\Controllers;
 
 use Phalcon\Mvc\Controller;
 

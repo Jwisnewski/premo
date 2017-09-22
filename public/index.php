@@ -8,13 +8,15 @@ use Phalcon\Mvc\Url as UrlProvider;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 use Phalcon\Mvc\Router;
 
+
 // Register an autoloader
 $loader = new Loader();
 
-$loader->registerDirs(
+$loader->registerNamespaces(
     [
-        "../src/controllers/",
-        "../src/models/",
+        'Premo\Src\Controllers' => "../src/controllers/",
+        'Premo\Src\Models' =>"../src/models/",
+        'Premo\Src\Services' => "../src/services"
     ]
 );
 
@@ -36,10 +38,46 @@ $di->set(
     }
 );
 
+$di->set('url', function(){
+    $dispatcher = new Dispatcher();
+    $dispatcher->setDefaultNamespace(
+        'Premo\Src\Controllers'
+    );
+});
+
 // Use $_SERVER["REQUEST_URI"]
 $di->get('router')->setUriSource(
     Router::URI_SOURCE_SERVER_REQUEST_URI
 );
+
+$router = $di->get('router');
+
+$router->add(
+    "/",
+    [
+            "controller" => "index",
+
+            "action"     => "index",
+    ]
+);
+$router->add(
+ "/info",
+    [
+         "controller" => "info",
+
+        "action"     => "info",
+    ]
+);
+$router->add(
+    "/info/(id:[0-9]+",
+    [
+             "controller" => "info",
+
+            "action"     => "info",
+    ]
+);
+
+$router->handle();
 
 // Setup the database service
 $di->set(
@@ -55,8 +93,6 @@ $di->set(
         );
     }
 );
-
-
 
 $application = new Application($di);
 

@@ -11,9 +11,17 @@ describe(FetchMovies::class, function () {
             $fetcher = new FetchMovies();
             $movie_list = $fetcher->getUpcomingMovies();
 
-            foreach($movie_list as $movie){
-                expect($movie)->toBeAnInstanceOf(Movie::class);
-            }
+        it('converts the json string into an array', function () {
+            expect(FetchMovies::class)
+                ->toReceive('jsonStringToArray');
+            $fetcher = new FetchMovies();
+            $fetcher->getLatestMovie();
+        });
+
+        it("gets the latest movie", function () {
+            $fetcher = new FetchMovies();
+            $movie = $fetcher->getLatestMovie();
+            expect($movie)->toBeAnInstanceOf(Movie::class);
         });
     });
 });
