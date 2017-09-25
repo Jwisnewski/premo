@@ -8,14 +8,18 @@ use Premo\Services\FetchMovies;
 
 class IndexController extends Controller
 {
+    /**
+     *
+     */
     public function indexAction()
     {
         $fetcher = new FetchMovies();
+        $sort_by = $this->request->getQuery("sort");
         $movies_array = $fetcher->getUpcomingMovies();
         $this->passToDb($movies_array);
+        $movies_array = $this->sort($sort_by);
         $this->view->movies = $movies_array;
     }
-
 
     /**
      * @param $movies_array
@@ -27,8 +31,29 @@ class IndexController extends Controller
             if (empty($movie)) {
                 $movies_array[$i]->save();
             }
+        }
+    }
+
+    /**
+     * @param $sorter
+     * @return \Phalcon\Mvc\Model\ResultsetInterface
+     */
+    protected function sort($sorter)
+    {
+        if($sorter == "critic_rating") {
+            $filtered_movies = Movie::find(["order" => "critic_rating DESC"]);
 
         }
+
+        elseif($sorter == "alphabetical"){
+            $filtered_movies = Movie::find(["order" => "title ASC"]);
+        }
+
+        else{
+            $filtered_movies = Movie::find(["order" => "release_date ASC"]);
+        }
+
+        return $filtered_movies;
     }
 
 }

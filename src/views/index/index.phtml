@@ -8,6 +8,25 @@ echo PHP_EOL;
 
 echo "</br>";
 
+echo $this->tag->linkTo(
+    "?sort=critic_rating",
+    "critic_rating"
+);
+echo "<br/>";
+
+echo $this->tag->linkTo(
+    "?sort=alphabetical",
+    "alphabetical"
+);
+echo "<br/>";
+
+echo $this->tag->linkTo(
+    "?sort=release_data",
+    "release_date"
+);
+echo "<br/>";
+echo "<br/>";
+
 for($i=0; $i<count($movies); $i++) {
     echo $this->tag->linkTo(
         "info/{$movies[$i]->id}",

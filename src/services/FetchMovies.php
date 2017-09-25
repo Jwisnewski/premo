@@ -96,7 +96,6 @@ class FetchMovies
 
         $fetch_params = array_merge($default_params, $params);
         $url = self::BASE_URL . $endpoint . '?' . http_build_query($fetch_params);
-        echo($url);
         return $url;
     }
 }
