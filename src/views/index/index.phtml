@@ -1,12 +1,17 @@
 <?php
 
-echo "<h1>Hello Let's Sign Up!</h1>";
+echo "<h1>Upcoming Movies:</h1>";
 
 echo PHP_EOL;
 
 echo PHP_EOL;
 
-echo $this->tag->linkTo(
-	"signup",
-    "Sign Up Here!"
-);
+echo "</br>";
+
+for($i=0; $i<count($movies); $i++) {
+    echo $this->tag->linkTo(
+        "info/{$movies[$i]->id}",
+        $movies[$i]->title
+    );
+    echo "<br/>";
+}
