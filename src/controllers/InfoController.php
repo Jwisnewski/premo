@@ -16,7 +16,9 @@ class InfoController extends Controller
 {
     public function showAction($id)
     {
+        $image_baseURL='https://image.tmdb.org/t/p/w1280/';
         $movie = Movie::findFirst($id);
         $this->view->movie = $movie;
+        $this->view->baseUrl = $image_baseURL;
     }
 }
