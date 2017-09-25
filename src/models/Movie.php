@@ -1,4 +1,5 @@
 <?php
+
 namespace Premo\Models;
 
 use Phalcon\Mvc\Model;
@@ -20,5 +21,10 @@ class Movie extends Model
     public function initialize()
     {
         $this->setSource("movies");
+    }
+
+    public function getPosterUrl()
+    {
+        return 'https://image.tmdb.org/t/p/w320' . $this->poster_image;
     }
 }

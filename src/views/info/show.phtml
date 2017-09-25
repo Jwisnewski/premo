@@ -8,8 +8,11 @@ echo PHP_EOL;
 
 echo"</br>";
 
-//echo file_get_contents('https://image.tmdb.org/t/p/w1280' . $movie->poster_image);
+?>
 
+    <img src="<?php echo $movie->getPosterUrl()?>">
+
+<?php
 echo "</br>";
 
 echo $movie->title;
