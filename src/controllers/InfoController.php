@@ -14,10 +14,9 @@ use Premo\Models\Movie;
 
 class InfoController extends Controller
 {
-    public function infoAction($id)
+    public function showAction($id)
     {
         $movie = Movie::findFirst($id);
-        $this->view->title = $movie->title;
-        $this->view->description = $movie->description;
+        $this->view->movie = $movie;
     }
 }

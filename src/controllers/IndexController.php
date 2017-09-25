@@ -40,20 +40,18 @@ class IndexController extends Controller
      */
     protected function sort($sorter)
     {
-        if($sorter == "critic_rating") {
-            $filtered_movies = Movie::find(["order" => "critic_rating DESC"]);
+        $params = [
+            'conditions' => 'release_date  > "' . date('Y-m-d') . '"'
+        ];
 
+        if ($sorter == "critic_rating") {
+            $params['order'] = 'critic_rating';
+        } elseif ($sorter == "alphabetical") {
+            $params['order'] = 'title ASC';
+        } else {
+            $params['order'] = 'release_date ASC';;
         }
-
-        elseif($sorter == "alphabetical"){
-            $filtered_movies = Movie::find(["order" => "title ASC"]);
-        }
-
-        else{
-            $filtered_movies = Movie::find(["order" => "release_date ASC"]);
-        }
-
-        return $filtered_movies;
+        return Movie::find($params);
     }
 
 }

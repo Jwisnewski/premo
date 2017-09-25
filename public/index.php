@@ -8,6 +8,7 @@ use Phalcon\Mvc\Url as UrlProvider;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 use Phalcon\Mvc\Router;
 
+date_default_timezone_set('UTC');
 
 // Register an autoloader
 $loader = new Loader();
