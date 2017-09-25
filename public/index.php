@@ -8,15 +8,16 @@ use Phalcon\Mvc\Url as UrlProvider;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 use Phalcon\Mvc\Router;
 
+date_default_timezone_set('UTC');
 
 // Register an autoloader
 $loader = new Loader();
 
 $loader->registerNamespaces(
     [
-        'Premo\Src\Controllers' => "../src/controllers/",
-        'Premo\Src\Models' =>"../src/models/",
-        'Premo\Src\Services' => "../src/services"
+        'Premo\Controllers' => "../src/controllers/",
+        'Premo\Models' =>"../src/models/",
+        'Premo\Services' => "../src/services"
     ]
 );
 
@@ -37,13 +38,10 @@ $di->set(
         return $view;
     }
 );
-
-$di->set('url', function(){
-    $dispatcher = new Dispatcher();
-    $dispatcher->setDefaultNamespace(
-        'Premo\Src\Controllers'
-    );
-});
+$dispatcher = $di->get('dispatcher');
+$dispatcher->setDefaultNamespace(
+    'Premo\Controllers'
+);
 
 // Use $_SERVER["REQUEST_URI"]
 $di->get('router')->setUriSource(
@@ -69,7 +67,7 @@ $router->add(
     ]
 );
 $router->add(
-    "/info/(id:[0-9]+",
+    "/info/(id:[0-9]+)",
     [
              "controller" => "info",
 

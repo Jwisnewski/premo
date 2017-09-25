@@ -4,7 +4,8 @@
     "license": "MIT",
     "require-dev": {
         "kahlan/kahlan": "^3.1",
-        "behat/behat": "^3.3"
+        "behat/behat": "^3.3",
+        "phalcon/ide-stubs": "^3.2"
     },
     "authors": [
         {

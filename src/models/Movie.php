@@ -3,7 +3,7 @@ namespace Premo\Models;
 
 use Phalcon\Mvc\Model;
 
-class Movie
+class Movie extends Model
 {
     public $id;
 
