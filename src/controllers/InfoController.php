@@ -14,6 +14,9 @@ use Premo\Models\Movie;
 
 class InfoController extends Controller
 {
+    /**
+     * @param $id
+     */
     public function showAction($id)
     {
         $image_baseURL='https://image.tmdb.org/t/p/w1280/';

@@ -23,6 +23,9 @@ class Movie extends Model
         $this->setSource("movies");
     }
 
+    /**
+     * @return string
+     */
     public function getPosterUrl()
     {
         return 'https://image.tmdb.org/t/p/w320' . $this->poster_image;

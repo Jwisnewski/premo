@@ -11,6 +11,9 @@ class Users extends Model
 
     public $email;
 
+    /**
+     *
+     */
     public function initialize()
     {
         $this->setSource("users");
