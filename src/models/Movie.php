@@ -18,6 +18,9 @@ class Movie extends Model
 
     public $description;
 
+    /**
+     * sets the source of the movie class
+     */
     public function initialize()
     {
         $this->setSource("movies");

@@ -5,12 +5,13 @@ use Phalcon\Mvc\Controller;
 
 class SignupController extends Controller
 {
+    //controls the index actions
     public function indexAction()
     {
     }
 
     /**
-     *
+     * is a signup register
      */
     public function registerAction()
     {

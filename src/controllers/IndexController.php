@@ -9,7 +9,7 @@ use Premo\Services\FetchMovies;
 class IndexController extends Controller
 {
     /**
-     *
+     * gets movies and enters them into the database
      */
     public function indexAction()
     {
@@ -22,7 +22,7 @@ class IndexController extends Controller
     }
 
     /**
-     * @param $movies_array
+     * @param $movies_array saves movies to the database
      */
     protected function passToDb($movies_array)
     {
@@ -53,5 +53,4 @@ class IndexController extends Controller
         }
         return Movie::find($params);
     }
-
 }
