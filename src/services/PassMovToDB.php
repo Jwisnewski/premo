@@ -6,6 +6,9 @@ use Premo\Services\FetchMovies;
 
 class PassMovToDb
 {
+    /**
+     * @param $movie
+     */
     public function passMe($movie)
     {
     }
