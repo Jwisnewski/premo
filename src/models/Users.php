@@ -12,7 +12,7 @@ class Users extends Model
     public $email;
 
     /**
-     *
+     * sets the class source to users
      */
     public function initialize()
     {

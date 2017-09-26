@@ -12,7 +12,7 @@ class FetchMovies
 
     /**
      * @param string $json_string
-     * @return mixed
+     * @return array of strings
      */
     protected function jsonStringToArray($json_string)
     {
@@ -23,10 +23,9 @@ class FetchMovies
     /**
      * @return string
      */
-
     public function getTimeZone()
     {
-        $tz = 'America/New_York';
+        $tz = 'UTC';
         $timestamp = time();
         $dt = new \DateTime("now", new \DateTimeZone($tz)); //first argument "must" be a string
         $dt->setTimestamp($timestamp); //adjust the object to correct timestamp
@@ -34,8 +33,8 @@ class FetchMovies
     }
 
     /**
-     * @param array $raw_movies_array
-     * @return array
+     * @param array $raw_movies_array is an array of strings
+     * @return array of movies
      */
     protected function toMovieType(array $raw_movies_array)
     {
@@ -55,7 +54,7 @@ class FetchMovies
     }
 
     /**
-     * @return array
+     * @return array of upcoming movies
      */
     public function getUpcomingMovies()
     {
@@ -67,7 +66,7 @@ class FetchMovies
     }
 
     /**
-     * @return bool|string
+     * @return bool|string returns string from database
      */
     protected function getUpcomingString()
     {
