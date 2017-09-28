@@ -20,8 +20,11 @@ describe(FetchMovies::class, function () {
 
         it("gets the latest movie", function () {
             $fetcher = new FetchMovies();
-            $movie = $fetcher->getUpcomingMovies();
-            expect($movie)->toBeAnInstanceOf(Movie::class);
+            $movies = $fetcher->getUpcomingMovies();
+            foreach ($movies as $movie) {
+                expect($movie)
+                    ->toBeAnInstanceOf('Premo\Models\Movie');
+            }
         });
     });
 });
