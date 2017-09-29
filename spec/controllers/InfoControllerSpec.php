@@ -46,5 +46,20 @@ describe(InfoController::class, function () {
             //expect($instance->showAction($id))->toBeAnInstanceOf('Premo\\Models\\Movie');
 
         });
+        it( "passes the movie to the view to be displayed", function(){
+
+            $id = 'some_id';
+            $movie = new Movie();
+            $movie->id = $id;
+
+            allow(Movie::class)
+                ->toReceive('::findFirst')
+                ->with($id)
+                ->andReturn($movie);
+
+            $this->controller->showAction($id);
+
+            expect($this->controller->view->movie = $movie);
+        });
     });
 });
