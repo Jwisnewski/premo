@@ -15,7 +15,8 @@ Filter::register('api.patchers', function ($chain) {
             'Phalcon\Mvc\View',
             'Phalcon\Di\FactoryDefault',
             'Phalcon\Db\Adapter\Pdo\Mysql',
-            'Phalcon\Mvc\Router'
+            'Phalcon\Mvc\Router',
+            'Phalcon\Mvc\Controller'
         ]
     ]));
     return $chain->next();
