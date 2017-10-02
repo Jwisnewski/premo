@@ -14,9 +14,9 @@ class IndexController extends Controller
     public function indexAction()
     {
         $fetcher = new FetchMovies();
-        $sort_by = $this->request->getQuery("sort");
         $movies_array = $fetcher->getUpcomingMovies();
         $this->passToDb($movies_array);
+        $sort_by = $this->request->getQuery('sort');
         $movies_array = $this->sort($sort_by);
         $this->view->movies = $movies_array;
     }
@@ -51,6 +51,7 @@ class IndexController extends Controller
         } else {
             $params['order'] = 'release_date ASC';;
         }
+
         return Movie::find($params);
     }
 }

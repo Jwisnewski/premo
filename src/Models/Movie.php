@@ -45,4 +45,11 @@ class Movie extends Model
         return parent::findFirst($parameters);
     }
 
+    /**
+     * @inheritdoc
+     */
+    public static function find($parameters = null)
+    {
+        return parent::find($parameters);
+    }
 }

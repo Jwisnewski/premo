@@ -2,8 +2,6 @@
 
 use Phalcon\Mvc\Application;
 
-date_default_timezone_set('UTC');
-
 // Register an autoloader
 include '../vendor/autoload.php';
 include '../config/bootstrap.php';

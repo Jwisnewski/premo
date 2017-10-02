@@ -5,6 +5,8 @@ use Phalcon\Di\FactoryDefault;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 use Phalcon\Mvc\Router;
 
+date_default_timezone_set('UTC');
+
 // Create a DI
 $di = new FactoryDefault();
 
