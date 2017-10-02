@@ -45,7 +45,7 @@ class IndexController extends Controller
         ];
 
         if ($sorter == "critic_rating") {
-            $params['order'] = 'critic_rating';
+            $params['order'] = 'critic_rating DESC';
         } elseif ($sorter == "alphabetical") {
             $params['order'] = 'title ASC';
         } else {

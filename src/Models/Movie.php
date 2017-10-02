@@ -28,27 +28,21 @@ class Movie extends Model
     }
 
     /**
-     * @param $id
-     * @deprecated
-     */
-    public function getFirst($id)
-    {
-        $movie = new Movie();
-        Stub::on(Model::class)
-            ->method('::findFirst', $id)
-            ->andReturn($movie);
-    }
-    /**
      * @return string
      */
     public function getPosterUrl()
     {
-        return 'https://image.tmdb.org/t/p/w320' . $this->poster_image;
+        $poster_url =  'https://image.tmdb.org/t/p/w320' . $this->poster_image;
+
+        return $poster_url;
     }
 
+    /**
+     * @inheritdoc
+     */
     public static function findFirst($parameters = null)
     {
-        parent::findFirst($parameters);
+        return parent::findFirst($parameters);
     }
 
 }
